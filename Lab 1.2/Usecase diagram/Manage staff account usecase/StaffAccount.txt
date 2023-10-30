@@ -1,0 +1,16 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+actor Manager as M
+
+rectangle "Construction materials store management system" {
+(Manage staff account) <-- M
+
+(Manage staff account) ..> (Create staff account): <<include>>
+(Manage staff account) ..> (Edit staff account): <<include>>
+(Manage staff account) ..> (Delete staff account): <<include>>
+(Search staff account) ..> (Manage staff account): <<extend>>
+}
+
+@enduml

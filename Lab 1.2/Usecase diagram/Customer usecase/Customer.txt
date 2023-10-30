@@ -1,0 +1,21 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+actor Customer as C
+
+rectangle "Construction materials store management system" {
+C --> (Sign Up)
+C --> (Sign In)
+C --> (View Product Information)
+C --> (Place order)
+C --> (Track order status)
+
+(Sign Up) ..> (Save user information): <<include>>
+(Sign In) ..> (Authenticate): <<include>>
+(Sign Up) ..> (Authenticate): <<include>>
+(Place order) ..> (Order online): <<include>>
+(Place order) ..> (Order in store): <<include>>
+}
+
+@enduml

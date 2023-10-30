@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+actor Manager as M
+
+rectangle "Construction materials store management system" {
+(Manage warehouse) <-- M
+
+(Manage warehouse) ..> (Manage warehouse inbound): <<include>>
+(Manage warehouse) ..> (Manage warehouse outbound): <<include>>
+(Search warehouse invoice) ..> (Manage warehouse): <<extend>>
+(Manage warehouse inbound) ..> (Create warehouse invoice): <<include>>
+(Manage warehouse outbound) ..> (Create warehouse invoice): <<include>>
+(Confirm invoice) ..> (Create warehouse invoice): <<extend>>
+(Manage warehouse inbound) ..> (Update product): <<include>>
+(Manage warehouse outbound) ..> (Update product): <<include>>
+(Update product) ..> (Update quantity of product): <<include>>
+(Notify for staff and manager about status of the product) ..> (Update product): <<extend>>
+}
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+actor Manager as M
+
+rectangle "Construction materials store management system" {
+(Sign Up) <-- M
+(Sign In) <-- M
+(View Product Information) <-- M
+(Update Product Information) <-- M 
+(Manage order) <-- M
+(Stocktaking) <-- M
+(Manage warehouse inbound) <-- M
+(Manage warehouse outbound) <-- M
+(Manage staff account) <-- M
+
+(Sign Up) ..> (Save user information): <<include>>
+(Sign In) ..> (Authenticate): <<include>>
+(Sign Up) ..> (Authenticate): <<include>>
+(Create warehouse receipt) ..> (Manage warehouse inbound): <<extend>>
+(Confirm warehouse receipt) ..> (Manage warehouse inbound): <<extend>>
+(Confirm order) ..> (Manage order): <<extend>>
+(Update order) ..> (Manage order): <<extend>>
+(Create invoice) ..> (Manage order): <<extend>>
+(Track order status) ..> (Manage order): <<extend>>
+(Create warehouse delivery note) ..> (Manage warehouse outbound): <<extend>>
+(Confirm delivery) ..> (Manage warehouse outbound): <<extend>>
+}
+
+@enduml
