@@ -1,0 +1,127 @@
+@startuml
+interface User{
+        id: string
+        username: string
+        password: string
+        display_name: string
+        status: string 
+        user_attributes: mixed 
+        roles: array 
+    }
+    
+    class Customer {
+        userId: string 
+        address: string
+        phone: number
+    }
+
+    class Staff {
+        userId:  string
+        staff_start_date: Date
+        staff_salary: Number
+        phone: Number
+        position: String
+    }   
+
+    class Manager {
+        userId: string
+        manager_start_date: Date
+        manager_salary: Number
+        phone: Number
+    }
+    class Product {
+        id: string
+        product_name: string
+        product_thumb: string
+        product_description: string
+        product_price: number
+        product_brand: string
+        product_unit: string
+        isDraft: Boolean
+        isPublished: Boolean
+        product_rating Number
+        product_categories: array
+    }
+
+    class Category {
+        id: string
+        category_name: string
+        Category_description: string
+        parent_category: string
+        sub_categories: array 
+    }
+
+    class Inventory {
+        id: string 
+        inventory_productId: string
+        inventory_stock: number
+        inventory_reservations: array
+    }
+
+
+
+    class Discount {
+        id: string
+        discount_name: String
+        discount_description: String
+        discount_code: String
+        discount_value: Number
+        discount_max_uses: Number
+        discount_max_uses_per_user: number
+        discount_user_used: Array
+        discount_type: string
+        discount_start_date: Date
+        discount_end_date: Date
+        discount_uses_count: Number
+        discount_min_order_value: Number
+        discount_is_active: Boolean
+        discount_apply_to: String
+        discount_products: Array
+    }
+
+    class Cart {
+        id: string 
+        cart_userId: string
+        cart_state: string
+        cart_count_product: Number
+        cart_products: Array
+    }
+
+
+    class Bill {
+        id: string 
+        bill_date: Date
+        bill_note: string
+        bill_type: enum
+        tax: Number
+        supplier: string
+        product_list: array
+        total_cost: Number
+        discount: Number
+        final_cost: Number
+    }
+
+    class Order {
+        id: string
+        order_date: Date
+        order_userId: string
+        order_address: string
+        order_phone: Number
+        order_note: string
+        order_products: Array
+        total_cost: Number
+        discount: Number
+        final_cost: Number
+    }
+
+    User <|-- Customer
+    User <|-- Staff
+    User <|-- Manager
+    User *-- Cart
+    User -- Order
+    
+    Inventory *-- Product
+    
+    Product -- Category
+    Category -- Category
+@enduml
