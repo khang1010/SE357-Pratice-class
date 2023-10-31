@@ -1,0 +1,18 @@
+@startuml
+autonumber
+actor Staff
+boundary "Order management page" as Page
+control "Order controller" as OrderClr
+Staff -> Page ++: Select order
+Page -> OrderClr ++: Create invoice for order
+OrderClr -> OrderClr: Send invoice through email
+OrderClr -> OrderClr: Update order status
+alt Successful case
+OrderClr --> Page: Create invoice successful
+Page --> Staff: Notify success
+else Failed case
+OrderClr --> Page: Notify invoice failed
+Page --> Staff: Notify failure
+end
+
+@enduml

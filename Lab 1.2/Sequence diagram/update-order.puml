@@ -1,0 +1,18 @@
+@startuml
+autonumber
+actor Staff
+boundary "Order management page" as Page
+control "Order controller" as OrderClr
+Staff -> Page ++: Access order details and switch to edit mode
+Page -> OrderClr ++: Update order information
+OrderClr -> OrderClr: Validate data
+OrderClr -> OrderClr: Update order
+alt Successful case
+OrderClr --> Page: Update successful
+Page --> Staff: Notify success
+else Failed case
+OrderClr --> Page: Update failed
+Page --> Staff: Notify failure
+end
+
+@enduml
