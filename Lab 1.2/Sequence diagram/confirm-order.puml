@@ -1,0 +1,21 @@
+@startuml
+autonumber
+actor Staff
+boundary "Order management page" as Page
+control "Order controller" as OrderClr
+control "Inventory controller" as InventoryClr
+Staff -> Page ++: Review order information
+Page -> OrderClr --++: Confirm order
+OrderClr -> OrderClr: Change order status
+OrderClr -> InventoryClr ++: Update the quantity of products in stock
+alt Successful case
+InventoryClr --> OrderClr: Update successful
+OrderClr --> Page: Confirm order successfully
+Page --> Staff: Notify success
+else Failed case
+InventoryClr --> OrderClr: Update failed
+OrderClr --> Page: Confirm order failed
+Page --> Staff: Notify failure
+end
+
+@enduml

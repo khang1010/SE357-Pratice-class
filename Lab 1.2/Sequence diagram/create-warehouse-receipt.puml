@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor Staff
+boundary "Create warehouse receipt page" as Page
+control "Bill controller" as BillClr
+Staff -> Page ++: Enter receipt data
+Page -> Page: Validate input
+alt valid input case
+Page -> BillClr ++: Create receipt
+else invalid input case
+Page -> Staff: Prompt to correct
+end
+BillClr -> BillClr: Validate data
+BillClr -> BillClr: Create receipt
+BillClr -> BillClr: Create confirm receipt request
+alt successful case
+BillClr --> Page: Create receipt successful
+Page --> Staff: Notify success
+else invalid receipt information
+BillClr --> Page: Create receipt failed
+Page --> Staff: Notify failure
+end
+@enduml

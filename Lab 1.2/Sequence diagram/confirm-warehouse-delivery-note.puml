@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor Manager
+boundary "Confirm warehouse delivery note page" as Page
+control "Bill controller" as BillClr
+control "Inventory controller" as InventoryClr
+Manager -> Page ++: Review delivery note information
+Page -> BillClr ++: Confirm delivery note
+BillClr -> InventoryClr ++: Update products quantity
+alt successful case
+InventoryClr -> BillClr: Update successful
+BillClr -> BillClr: Change delivery note status
+BillClr -> BillClr: Print delivery note
+BillClr -> Page: Confirm delivery note successful
+Page --> Manager: Notify success
+else failed case
+InventoryClr -> Page: Confirm delivery note failed
+Page --> Manager: Notify failure
+end
+@enduml

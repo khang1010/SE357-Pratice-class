@@ -1,0 +1,19 @@
+@startuml
+autonumber
+actor Customer as Customer
+boundary "Create order page" as Page
+control "Order controller" as Controller
+Customer -> Page ++: Fill order information
+Page -> Controller --++: Submit order
+Controller -> Controller: Validate order information
+Controller -> Controller: Generates an order with a unique number
+Controller -> Controller: Create order confirmation request
+
+alt successful case
+Controller --> Page: Create order successful
+Page --> Customer: Notify successful
+else invalid order information
+Controller --> Page: Create order failed
+Page --> Customer: Notify failed
+end
+@enduml

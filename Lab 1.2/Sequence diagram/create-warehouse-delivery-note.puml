@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor Staff
+boundary "Create warehouse delivery note page" as Page
+control "Bill controller" as BillClr
+Staff -> Page ++: Enter delivery note data
+Page -> Page: Validate input
+alt valid input case
+Page -> BillClr ++: Create delivery note
+else invalid input case
+Page -> Staff: Prompt to correct
+end
+BillClr -> BillClr: Validate data
+BillClr -> BillClr: Create delivery note
+BillClr -> BillClr: Create delivery note request
+alt successful case
+BillClr --> Page: Create delivery note successful
+Page --> Staff: Notify success
+else invalid receipt information
+BillClr --> Page: Create delivery note failed
+Page --> Staff: Notify failure
+end
+@enduml

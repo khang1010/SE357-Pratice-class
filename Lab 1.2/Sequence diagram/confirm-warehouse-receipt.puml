@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor Manager
+boundary "Confirm warehouse receipt page" as Page
+control "Bill controller" as BillClr
+control "Inventory controller" as InventoryClr
+Manager -> Page ++: Review receipt information
+Page -> BillClr ++: Confirm receipt
+BillClr -> InventoryClr ++: Update products quantity
+alt successful case
+InventoryClr -> BillClr: Update successful
+BillClr -> BillClr: Change receipt status
+BillClr -> BillClr: Print receipt
+BillClr -> Page: Confirm receipt successful
+Page --> Manager: Notify success
+else failed case
+InventoryClr -> Page: Confirm receipt failed
+Page --> Manager: Notify failure
+end
+@enduml

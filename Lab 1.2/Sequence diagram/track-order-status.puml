@@ -1,0 +1,16 @@
+@startuml
+autonumber
+actor Customer
+boundary "Track order page" as Page
+control "Order controller" as Controller
+Customer -> Page ++: Enter order number
+Page -> Controller ++: Request order details
+Controller -> Controller: Find order
+alt Order exist case
+Controller --> Page: Return order details
+Page --> Customer: Show order status
+else Order not found case
+Controller --> Page: Notify order not found
+Page --> Customer: Notify order not found
+end
+@enduml
