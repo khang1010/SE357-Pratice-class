@@ -1,0 +1,26 @@
+@startuml
+start
+:login;
+if (Already have an account?) then (yes) 
+else (no)
+  :register;
+endif
+:order product;
+if (Admin confirms the order?) then (yes)
+:payout;
+:delivery;
+else (no)
+end
+endif
+if(Confirm receipt of order?) then (yes)
+end
+else (no)
+:request to check shipping status;
+endif
+if (Shipping confirmation failed?) then (yes)
+:refund;
+else (no)
+end
+endif
+stop
+@enduml
