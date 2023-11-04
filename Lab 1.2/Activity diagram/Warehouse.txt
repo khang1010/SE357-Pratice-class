@@ -1,0 +1,23 @@
+@startuml
+|Store|
+start
+: Submit warehouse request;
+|Supplier|
+if (Receive a warehouse request?)then (yes)
+:check the goods;
+if (Delivery confirmation?) then (yes)
+:ship;
+else (no)
+end
+endif
+else (no)
+end
+endif
+|Store|
+if (Confirm receipt of goods?) then (yes)
+:pay;
+else (no)
+:send a notification that the goods have not been received;
+endif
+stop
+@enduml

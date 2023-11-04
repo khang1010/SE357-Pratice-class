@@ -11,7 +11,7 @@ endif
 |Store|
 if (Store owmer confirms the order?) then (yes)
 |Customer|
-:payout;
+:pay;
 |Store|
 :ship;
 else (no)
