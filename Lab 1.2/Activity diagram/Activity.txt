@@ -1,4 +1,5 @@
 @startuml
+|Customer|
 start
 :login;
 if (Already have an account?) then (yes) 
@@ -6,21 +7,29 @@ else (no)
   :register;
 endif
 :order product;
-if (Admin confirms the order?) then (yes)
+|Customer|
+|Store|
+if (Store owmer confirms the order?) then (yes)
+|Customer|
 :payout;
+|Store|
 :delivery;
 else (no)
+|Store|
 end
 endif
+|Customer|
 if(Confirm receipt of order?) then (yes)
 end
 else (no)
 :request to check shipping status;
 endif
+|Store|
 if (Shipping confirmation failed?) then (yes)
 :refund;
 else (no)
 end
 endif
+
 stop
 @enduml
