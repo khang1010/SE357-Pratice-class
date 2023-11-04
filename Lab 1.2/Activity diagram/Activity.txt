@@ -13,7 +13,7 @@ if (Store owmer confirms the order?) then (yes)
 |Customer|
 :payout;
 |Store|
-:delivery;
+:ship;
 else (no)
 |Store|
 end
