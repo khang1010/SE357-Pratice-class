@@ -1,36 +1,54 @@
 @startuml
-interface User{
-        id: string
+
+class User{
+        _id: ObjectId
         username: string
         password: string
         display_name: string
         status: string 
-        user_attributes: mixed 
-        roles: array 
+        phone: string
+        isBlocked: boolean
+        user_attributes: mixed
+        roles: array
+        signIn()
+        signUp()
+        signOut()
+        getUserInfo()
+        setUserInfo()
+	handleRefreshToken()
     }
     
     class Customer {
-        userId: string 
+        userId: ObjectId 
         address: string
-        phone: number
+	placeOrder()
     }
 
     class Staff {
-        userId:  string
+        userId:  ObjectId
         staff_start_date: Date
         staff_salary: Number
-        phone: Number
         position: String
+	updateProduct()
+	confirmOrder()
+	createInvoice()
     }   
 
     class Manager {
-        userId: string
+        userId: ObjectId
         manager_start_date: Date
         manager_salary: Number
-        phone: Number
+        updateStaffAccount()
+	deleteStaffAccount()
+	createStaffAccount()
+	updateProduct()
+	confirmOrder()
+	createInvoice()
+	createWarehouseReceipt()
+	confirmWarehouseReceipt()
     }
     class Product {
-        id: string
+        _id: ObjectId
         product_name: string
         product_thumb: string
         product_description: string
@@ -38,30 +56,39 @@ interface User{
         product_brand: string
         product_unit: string
         isDraft: Boolean
-        isPublished: Boolean
-        product_rating Number
+        product_ratingAverage: Number
         product_categories: array
+	getProductInfo()
+	setProductInfo()
+	publishProduct()
+	unpublishProduct()
+	countRating()
     }
 
     class Category {
-        id: string
+        _id: ObjectId
         category_name: string
-        Category_description: string
-        parent_category: string
-        sub_categories: array 
+        category_description: string
+	getCategory()
+	setCategory()
     }
 
     class Inventory {
-        id: string 
-        inventory_productId: string
+        _id: ObjectId 
+        inventory_productId: ObjectId
         inventory_stock: number
         inventory_reservations: array
+	getInventory()
+	setStock()
+	addReservations()
+	import()
+	export()
     }
 
 
 
     class Discount {
-        id: string
+        _id: ObjectId
         discount_name: String
         discount_description: String
         discount_code: String
@@ -77,51 +104,119 @@ interface User{
         discount_is_active: Boolean
         discount_apply_to: String
         discount_products: Array
+	getDiscount()
+	setDiscount()
+	activeDiscount()
+	inactiveDiscount()
+	addProductApplyDiscount()
     }
 
     class Cart {
-        id: string 
-        cart_userId: string
+        _id: ObjectId 
+        cart_userId: ObjectId
         cart_state: string
         cart_count_product: Number
         cart_products: Array
+	getCart()
+	setCart()
+	addProduct()
+	updateQuantityProduct()
     }
 
 
     class Bill {
-        id: string 
+        _id: ObjectId 
         bill_date: Date
         bill_note: string
-        bill_type: enum
+        bill_type: string
         tax: Number
         supplier: string
         product_list: array
         total_cost: Number
         discount: Number
         final_cost: Number
+	getBill()
+	setBill()
+	calculateCost()
     }
 
     class Order {
-        id: string
+        _id: ObjectId
         order_date: Date
-        order_userId: string
-        order_address: string
-        order_phone: Number
+        order_userId: ObjectId
+        order_address: Object
+	order_checkout: Object
+	order_payment: Object
+	order_status: string
+        order_phone: string
         order_note: string
         order_products: Array
-        total_cost: Number
-        discount: Number
-        final_cost: Number
+	getOrder()
+	setOrder()
+	checkoutReview()
+	addDiscountCode()
+    }
+    class Comment {
+        _id: ObjectId
+        comment_productId: ObjectId
+	comment_userId: ObjectId
+	comment_content: string
+	comment_left: Number
+	comment_right: Number
+	comment_parentId: ObjectId
+	getComment()
+	setComment()
+    }
+    class Notification {
+        _id: ObjectId
+        noti_type: string
+	noti_receivedId: ObjectId
+	noti_content: string
+	noti_options: Array
+	getNotification()
+	setNotification()
+	addOption()
+    }
+    class KeyToken {
+        _id: ObjectId
+        userId: ObjectId
+	privateKey: string
+	publicKey: string
+	refreshToken: string
+	refreshTokenUsed: Array
+	getKeyToken()
+	addTokenUsed()
+	setToken()
+    }
+    class Favorite {
+        _id: ObjectId
+        userId: ObjectId
+	count_products: Number
+	products: Array
+	getFavoriteList()
+	addProduct()
+	setFavoriteList()
     }
 
-    User <|-- Customer
-    User <|-- Staff
-    User <|-- Manager
-    User *-- Cart
-    User -- Order
+    	Customer --|> User
+    	Staff --|> User
+    	User <|- Manager
+
+    	User "1" *-- "1" Cart
+    	User "1" *-- "0..*" Order
+	User "1" *-- "1" KeyToken
+	User "1..*" *-- "0..*" Notification
+	User "1" *-- "1" Favorite
+	User "1" o-- "0..*" Comment
     
-    Inventory *-- Product
+    	Inventory "1" --* "1" Product
+	Favorite "0..*" --* "0..*" Product
+	Cart "0..*" --* "1..*" Product
+	Order "0..*" --* "1..*" Product
+	Discount "0..*" --* "1..*" Product
+	Bill "0..*" --* "1..*" Product
+	Comment "0..*" --* "1" Product
+	Product "0..*" --o "1..*" Category
     
-    Product -- Category
-    Category -- Category
+    	Comment "0..*" --* "1" Comment
 @enduml
