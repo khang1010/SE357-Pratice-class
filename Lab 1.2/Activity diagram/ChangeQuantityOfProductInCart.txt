@@ -1,0 +1,9 @@
+@startuml
+|User|
+:Change quantity of product in cart;
+|System|
+:Change quantity of product;
+:Save information of cart;
+:Notification: Update successfully;
+stop
+@enduml

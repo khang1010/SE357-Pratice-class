@@ -1,0 +1,10 @@
+@startuml
+|User|
+start
+:Click add product to cart;
+|System|
+:Add product to cart;
+:Save information to database;
+:Notification: add successful;
+stop
+@enduml

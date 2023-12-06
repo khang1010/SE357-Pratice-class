@@ -1,0 +1,17 @@
+@startuml
+|User|
+:Click delete product from cart;
+|System|
+:Open confirmation form;
+|User|
+:Confirm;
+|System|
+if(Confirmation successful) then (yes)
+:Remove product from cart;
+:Save information of cart;
+:Notification: Delete successfully;
+stop
+else (no)
+:Notification: Cancellation successful;
+end
+@enduml
