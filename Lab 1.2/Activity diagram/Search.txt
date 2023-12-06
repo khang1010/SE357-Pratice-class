@@ -1,0 +1,14 @@
+@startuml
+|User|
+start
+:Enter keywords;
+:Click search button;
+|System|
+:Find product match with keywords;
+if (product found ?) then (yes) 
+:Display all product found;
+else (no) 
+:Display "There are no product match search results";
+endif
+stop
+@enduml

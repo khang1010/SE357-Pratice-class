@@ -1,0 +1,11 @@
+@startuml
+|User|
+|System|
+
+|User|
+start
+:Click an order to view status;
+|System|
+:Display detail status;
+stop
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+|User|
+start
+:Click Buy now button;
+|System|
+:Navigate to Check out screen;
+:Request user to fill out 
+all of order information;
+|User|
+:Enter address, consignee information, select vouchers
+select payment method;
+:Click check out button;
+|System|
+:Calculate the total price;
+:Notification: total price;
+:Open confirmation form;
+|User|
+:confirm;
+|System|
+if(Confirmation successful) then (yes)
+switch (check payment method) 
+case (pay online)
+      :Request user 
+to make a payment;
+      |User|
+      while (Make payments) is (yes) 
+         |System|
+         :Verify payment;
+         if (Payment success?) then (yes)
+         :Notification "Payment successful";
+         :Save order;
+         :Navigate to Home screen;
+         stop
+         else (no)
+            :Notification "Payment failed";
+         endif
+      |User|
+      endwhile (no)
+         end
+|System|
+case (payment on delivery)
+endswitch
+:Save order;
+:Navigate to Home screen;
+stop
+else (no)
+:Notification "Order cancellation successful";
+:Navigate to Home screen;
+stop
+endif
+
+@enduml
