@@ -1,0 +1,21 @@
+@startuml
+|User<<Admin>>|
+:Click modify product;
+|System|
+:Load modify product page;
+|User<<Admin>>|
+:Enter infomation of product;
+:Click modify button;
+|System|
+:Open confirmation form;
+|User<<Admin>>|
+:Confirm;
+|System|
+if(Confirmation successful) then (yes)
+:Save product;
+:Notification: Modify successfully;
+stop
+else (no)
+:Notification: Cancellation successful;
+end
+@enduml

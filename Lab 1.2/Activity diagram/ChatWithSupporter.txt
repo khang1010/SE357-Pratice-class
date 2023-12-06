@@ -1,0 +1,19 @@
+@startuml
+|User <<Supporter>>|
+|User|
+start
+:Click chat button;
+|System|
+:Open chat page;
+|User|
+repeat
+   :Send message;
+   |User <<Supporter>>|
+   :Receive message;
+   :Send message;
+|User|
+:Receive message;
+repeat while (end chat?) is (no)
+-> yes;
+stop
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+|User<<Admin>>|
+:Click delete product;
+|System|
+:Open confirmation form;
+|User<<Admin>>|
+:Confirm;
+|System|
+if(Confirmation successful) then (yes)
+:Change status of product is "delete";
+:Notification: Delete successfully;
+stop
+else (no)
+:Notification: Cancellation successful;
+end
+@enduml

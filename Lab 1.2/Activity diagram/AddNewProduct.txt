@@ -1,0 +1,21 @@
+@startuml
+|User<<Admin>>|
+:Click add new product;
+|System|
+:Load add product page;
+|User<<Admin>>|
+:Enter infomation of new product;
+:Click add button;
+|System|
+:Open confirmation form;
+|User<<Admin>>|
+:Confirm;
+|System|
+if(Confirmation successful) then (yes)
+:Save product to database;
+:Notification: Add successfully;
+stop
+else (no)
+:Notification: Cancellation successful;
+end
+@enduml
